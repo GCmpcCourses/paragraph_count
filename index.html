@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Paragraph Count</title>
+  </head>
+
+  <body>
+    <h1>Counting Paragraphs</h1>
+    <p>This page uses a simple script to count and report the number of paragraph tags it contains.</p>
+    <p>The script is run when the page is loaded.</p>
+    <p>It might look like the values reported below are part of the original source, but in fact they are calculated!</p>
+    <p>Method 1 (nodeValue): There are <span id="count1">n/a</span> paragraph tags.  This directly changes the text of a textNode within a span tag.</p> 
+    <p>Method 2 (innerText): There are <span id="count2">n/a</span> paragraph tags.  This replaces existing text within a span tag.  Note that any HTML we provide (e.g. an em tag) is not interpreted.</p>
+    <p>Method 3 (innerHTML): There are <span id="count3">n/a</span> paragraph tags.  This replaces existing text within a span tag.  Note that this method interprets HTML we provide, hence the link!</p>
+
+    <script>
+        let pCount = document.getElementsByTagName("p").length
+
+        // Output to the console.
+        console.log("I counted " + pCount + " paragraph tags.")
+
+        // Set value of text node contained in span tag with appropriate id.
+        document.getElementById("count1").firstChild.nodeValue = pCount
+
+        // Replace existing text within matching span element using innerText property
+        // (Note: Could also use textContent property)
+        // Text that "looks" like HTML will be displayed in the page rather than interpreted as HTML.
+        document.getElementById("count2").innerText = `<em>${pCount}</em>`
+
+        // Replace existing HTML within matching span element using innerHTML property
+        // Text that looks like HTML will be interpreted as HTML!
+        document.getElementById("count3").innerHTML = `<a href="https://www.wikipedia.org/wiki/${pCount}">${pCount}</a>`
+    </script>
+  </body>
+</html>
